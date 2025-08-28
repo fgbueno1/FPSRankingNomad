@@ -24,6 +24,8 @@ export class KillLog {
   victimTeam: string;
   victimName: string;
   weapon: string;
+  assistTeam?: string;
+  assistName?: string;
 }
 
 export class WorldKillLog {
