@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import {
+  MatchLog,
   FpsLogsDto,
   MatchStartLog,
   MatchEndLog,
@@ -9,16 +10,42 @@ import {
 
 @Injectable()
 export class UploaderService {
-  parseLogFile(file: Express.Multer.File): FpsLogsDto[] {
+  parseLogFile(file: Express.Multer.File): MatchLog[] {
     const content = file.buffer.toString('utf-8');
     const lines = content.split('\n').filter((line) => line.trim() !== '');
 
-    return lines.map((line) => this.parseLine(line));
+    const matches: MatchLog[] = [];
+    let currentMatch: MatchLog | null = null;
+
+    for (const line of lines) {
+        const entry = this.parseLine(line);
+  
+        if (entry.type === 'MATCH_START') {
+          currentMatch = {
+            matchId: entry.matchId,
+            start: entry.timestamp,
+            events: [entry],
+          };
+          matches.push(currentMatch);
+        } else if (entry.type === 'MATCH_END') {
+          if (currentMatch && currentMatch.matchId === entry.matchId) {
+            currentMatch.end = entry.timestamp;
+            currentMatch.events.push(entry);
+            currentMatch = null;
+          }
+        } else {
+          if (currentMatch) {
+            currentMatch.events.push(entry);
+          }
+        }
+      }
+
+      return matches;
   }
 
   // parseLine parses line by line, and add it to the respective class strcture
   private parseLine(line: string): FpsLogsDto {
-    // Common timestamp extraction
+    line = line.trim();
     const [datePart, timePart, , ...rest] = line.split(' ');
     const timestamp = this.parseDateTime(`${datePart} ${timePart}`);
     const message = rest.join(' ');

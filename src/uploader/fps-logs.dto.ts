@@ -1,3 +1,10 @@
+export interface MatchLog {
+    matchId: string;
+    start: Date;
+    end?: Date;
+    events: FpsLogsDto[];
+  }
+
 export type FpsLogsDto =
   | MatchStartLog
   | MatchEndLog
