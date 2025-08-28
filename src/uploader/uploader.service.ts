@@ -74,7 +74,7 @@ export class UploaderService {
 
     // Player kill
     const killRegex =
-        /^<(\w+)> (\w+) killed <(\w+)> (\w+) using (\w+)(?: assisted by <(\w+)> (\w+))?$/;
+        /^<(\w+)> (\w+) killed <(\w+)> (\w+) using ([\w\s]+?)(?: assisted by <(\w+)> (\w+))?$/;
     const kill = message.match(killRegex);
     if (kill) {
         return {
