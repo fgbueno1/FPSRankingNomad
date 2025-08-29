@@ -1,0 +1,66 @@
+27/06/2025 17:00:00 - New match 50000007 has started
+27/06/2025 17:00:10 - <BLUE> Ethan killed <RED> Ava using M16 assisted by <BLUE> Olivia
+27/06/2025 17:00:25 - <BLUE> Ethan killed <RED> Mia using AK47 assisted by <BLUE> Olivia
+27/06/2025 17:00:40 - <BLUE> Ethan killed <RED> Emma using Desert Eagle assisted by <BLUE> Noah
+27/06/2025 17:00:55 - <BLUE> Ethan killed <RED> Liam using Shotgun
+27/06/2025 17:01:10 - <BLUE> Ethan killed <RED> Oliver using M16
+27/06/2025 17:01:25 - <WORLD> killed <RED> Ava by DROWN
+27/06/2025 17:01:40 - <BLUE> Noah killed <BLUE> Olivia using AK47
+27/06/2025 17:01:55 - <RED> Mia killed <BLUE> Ethan using AWP
+27/06/2025 17:02:10 - <BLUE> Ethan killed <RED> Emma using Shotgun assisted by <BLUE> Olivia
+27/06/2025 17:02:25 - <BLUE> Ethan killed <RED> Liam using Desert Eagle
+27/06/2025 17:02:40 - <BLUE> Ethan killed <RED> Oliver using M16 assisted by <BLUE> Olivia
+27/06/2025 17:02:55 - <WORLD> killed <BLUE> Ethan by DROWN
+27/06/2025 17:03:10 - <BLUE> Olivia killed <RED> Mia using AK47
+27/06/2025 17:03:25 - <BLUE> Ethan killed <RED> Emma using Shotgun
+27/06/2025 17:03:40 - <BLUE> Ethan killed <RED> Liam using M16 assisted by <BLUE> Noah
+27/06/2025 17:03:55 - <BLUE> Ethan killed <RED> Oliver using AK47
+27/06/2025 17:04:10 - <RED> Ava killed <BLUE> Ethan using Desert Eagle
+27/06/2025 17:04:25 - <BLUE> Ethan killed <RED> Mia using M16
+27/06/2025 17:04:40 - <BLUE> Ethan killed <RED> Emma using Shotgun assisted by <BLUE> Olivia
+27/06/2025 17:10:00 - Match 50000007 has ended
+
+27/06/2025 17:15:00 - New match 50000008 has started
+27/06/2025 17:15:10 - <RED> Noah killed <BLUE> Mia using AWP assisted by <RED> Emma
+27/06/2025 17:15:30 - <BLUE> Liam killed <RED> Olivia using M16 assisted by <BLUE> Ava
+27/06/2025 17:15:50 - <BLUE> Ava killed <RED> Liam using Desert Eagle
+27/06/2025 17:16:10 - <RED> Emma killed <BLUE> Liam using Shotgun
+27/06/2025 17:16:30 - <BLUE> Ava killed <RED> Noah using AK47
+27/06/2025 17:16:50 - <BLUE> Liam killed <RED> Emma using M16 assisted by <BLUE> Ava
+27/06/2025 17:17:10 - <WORLD> killed <BLUE> Ava by DROWN
+27/06/2025 17:17:30 - <RED> Olivia killed <BLUE> Liam using AWP
+27/06/2025 17:17:50 - <BLUE> Ava killed <RED> Noah using Shotgun assisted by <BLUE> Liam
+27/06/2025 17:18:10 - <BLUE> Liam killed <RED> Emma using Desert Eagle
+27/06/2025 17:18:30 - <BLUE> Ava killed <RED> Olivia using AK47
+27/06/2025 17:18:50 - <BLUE> Liam killed <RED> Noah using M16 assisted by <BLUE> Ava
+27/06/2025 17:19:10 - <WORLD> killed <RED> Emma by DROWN
+27/06/2025 17:19:30 - <BLUE> Ava killed <RED> Liam using Desert Eagle
+27/06/2025 17:19:50 - <BLUE> Liam killed <RED> Olivia using Shotgun assisted by <BLUE> Ava
+27/06/2025 17:20:10 - <BLUE> Ava killed <RED> Noah using M16
+27/06/2025 17:20:30 - <BLUE> Liam killed <RED> Emma using AK47
+27/06/2025 17:20:50 - <BLUE> Ava killed <RED> Olivia using Shotgun assisted by <BLUE> Liam
+27/06/2025 17:21:10 - <BLUE> Liam killed <RED> Noah using M16
+27/06/2025 17:25:00 - Match 50000008 has ended
+
+27/06/2025 17:30:00 - New match 50000009 has started
+27/06/2025 17:30:10 - <BLUE> Noel killed <RED> Ava using M16 assisted by <BLUE> Olivia
+27/06/2025 17:30:25 - <BLUE> Mia killed <RED> Emma using AK47 assisted by <BLUE> Olivia
+27/06/2025 17:30:40 - <BLUE> Mia killed <RED> Liam using Desert Eagle assisted by <BLUE> Olivia
+27/06/2025 17:30:55 - <BLUE> Mia killed <RED> Noah using Shotgun
+27/06/2025 17:31:10 - <BLUE> Olivia killed <RED> Oliver using M16
+27/06/2025 17:31:25 - <WORLD> killed <BLUE> Olivia by DROWN
+27/06/2025 17:31:40 - <BLUE> Mia killed <RED> Ava using AK47 assisted by <BLUE> Olivia
+27/06/2025 17:31:55 - <BLUE> Mia killed <RED> Emma using Desert Eagle
+27/06/2025 17:32:10 - <BLUE> Mia killed <RED> Liam using Shotgun assisted by <BLUE> Olivia
+27/06/2025 17:32:25 - <BLUE> Mia killed <RED> Noah using M16
+27/06/2025 17:32:40 - <BLUE> Mia killed <RED> Oliver using AK47 assisted by <BLUE> Olivia
+27/06/2025 17:32:55 - <WORLD> killed <RED> Ava by DROWN
+27/06/2025 17:33:10 - <BLUE> Mia killed <RED> Emma using Shotgun
+27/06/2025 17:33:25 - <BLUE> Olivia killed <RED> Liam using M16 assisted by <BLUE> Noel
+27/06/2025 17:33:40 - <BLUE> Olivia killed <RED> Noah using Desert Eagle
+27/06/2025 17:33:55 - <BLUE> Mia killed <RED> Oliver using AK47
+27/06/2025 17:34:10 - <BLUE> Mia killed <RED> Ava using Shotgun assisted by <BLUE> Olivia
+27/06/2025 17:34:25 - <BLUE> Noel killed <RED> Emma using M16
+27/06/2025 17:34:40 - <BLUE> Mia killed <RED> Liam using AK47 assisted by <BLUE> Olivia
+27/06/2025 17:40:00 - Match 50000009 has ended
+

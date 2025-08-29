@@ -43,6 +43,12 @@ export class LongestKillingStreak {
 }
 
 @Schema()
+export class TeamStats {
+  @Prop({ type: [PlayerStats], default: [] })
+  players: PlayerStats[];
+}
+
+@Schema()
 export class Match {
   @Prop({ required: true, unique: true })
   matchId: string;
@@ -59,8 +65,11 @@ export class Match {
   @Prop({ type: Object })
   score: Record<string, number>;
 
-  @Prop({ type: [PlayerStats], default: [] })
-  players: PlayerStats[];
+  @Prop({ type: TeamStats, default: () => ({ players: [] }) })
+  RED_TEAM: TeamStats;
+
+  @Prop({ type: TeamStats, default: () => ({ players: [] }) })
+  BLUE_TEAM: TeamStats;
 
   @Prop()
   longestKillingStreak: LongestKillingStreak;

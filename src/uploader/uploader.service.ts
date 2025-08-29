@@ -7,9 +7,13 @@ import {
   KillLog,
   WorldKillLog,
 } from './fps-logs.dto';
+import { MatchStatsService } from 'src/match-stats/match-stats.service';
+
 
 @Injectable()
 export class UploaderService {
+    constructor(private readonly matchStatsService: MatchStatsService) {}
+
   parseLogFile(file: Express.Multer.File): MatchLog[] {
     const content = file.buffer.toString('utf-8');
     const lines = content.split('\n').filter((line) => line.trim() !== '');
@@ -40,6 +44,7 @@ export class UploaderService {
         }
       }
 
+      this.matchStatsService.calculateAndSave(matches);
       return matches;
   }
 

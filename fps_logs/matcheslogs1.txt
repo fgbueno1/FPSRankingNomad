@@ -1,0 +1,62 @@
+25/06/2025 15:00:00 - New match 50000001 has started
+25/06/2025 15:00:15 - <RED> Alice killed <BLUE> Letty using M16 assisted by <RED> Eve
+25/06/2025 15:00:30 - <RED> Alice killed <BLUE> Carol using AK47 assisted by <RED> Bob
+25/06/2025 15:00:45 - <RED> Alice killed <BLUE> Dave using Desert Eagle assisted by <RED> Eve
+25/06/2025 15:01:00 - <RED> Alice killed <BLUE> Chris using Shotgun
+25/06/2025 15:01:15 - <RED> Alice killed <BLUE> Frank using M16 assisted by <RED> Bob
+25/06/2025 15:01:30 - <WORLD> killed <BLUE> Grace by DROWN
+25/06/2025 15:01:45 - <RED> Bob killed <RED> Bisteca using AK47
+25/06/2025 15:02:00 - <BLUE> Ian killed <RED> Alice using AWP
+25/06/2025 15:02:15 - <RED> Alice killed <BLUE> Jack using Shotgun assisted by <RED> Eve
+25/06/2025 15:02:30 - <BLUE> Letty killed <RED> Bisteca using M16
+25/06/2025 15:02:45 - <RED> Alice killed <BLUE> Dave using Desert Eagle
+25/06/2025 15:03:00 - <RED> Eve killed <BLUE> Frank using AK47
+25/06/2025 15:03:15 - <RED> Alice killed <BLUE> Grace using M16 assisted by <RED> Bob
+25/06/2025 15:03:30 - <WORLD> killed <RED> Bob by DROWN
+25/06/2025 15:03:45 - <BLUE> Carol killed <RED> David using Shotgun
+25/06/2025 15:04:00 - <RED> Alice killed <RED> Eve using AK47
+25/06/2025 15:04:15 - <RED> Alice killed <BLUE> Ian using Desert Eagle assisted by <RED> Bob
+25/06/2025 15:04:30 - <BLUE> Jack killed <RED> Alice using M16
+25/06/2025 15:04:45 - <RED> Bob killed <BLUE> Carol using AK47 assisted by <RED> Eve
+25/06/2025 15:05:00 - <RED> Alice killed <BLUE> Frank using Shotgun
+25/06/2025 15:10:00 - Match 50000001 has ended
+
+25/06/2025 15:15:00 - New match 50000002 has started
+25/06/2025 15:15:10 - <BLUE> Liam killed <RED> Bisteca using AWP assisted by <BLUE> Olivia
+25/06/2025 15:15:30 - <RED> Noah killed <BLUE> Olivia using M16 assisted by <RED> Emma
+25/06/2025 15:15:50 - <RED> Emma killed <BLUE> Liam using Desert Eagle assisted by <RED> Noah
+25/06/2025 15:16:10 - <BLUE> Mia killed <RED> Emma using Shotgun
+25/06/2025 15:16:30 - <RED> Noah killed <BLUE> Olivia using AK47 assisted by <RED> Emma
+25/06/2025 15:16:50 - <RED> Emma killed <BLUE> Mia using M16
+25/06/2025 15:17:10 - <WORLD> killed <RED> Noah by DROWN
+25/06/2025 15:17:30 - <BLUE> Liam killed <RED> Emma using AWP
+25/06/2025 15:17:50 - <RED> Noah killed <RED> Emma using Shotgun
+25/06/2025 15:18:10 - <RED> Emma killed <BLUE> Olivia using Desert Eagle
+25/06/2025 15:18:30 - <RED> Noah killed <BLUE> Mia using M16 assisted by <RED> Emma
+25/06/2025 15:18:50 - <BLUE> Liam killed <RED> Noah using AK47
+25/06/2025 15:19:10 - <RED> Emma killed <BLUE> Olivia using Shotgun
+25/06/2025 15:19:30 - <WORLD> killed <BLUE> Liam by DROWN
+25/06/2025 15:19:50 - <RED> Noah killed <BLUE> Mia using Desert Eagle
+25/06/2025 15:20:10 - <RED> Emma killed <BLUE> Olivia using M16
+25/06/2025 15:20:30 - <RED> Noah killed <BLUE> Liam using AK47 assisted by <RED> Emma
+25/06/2025 15:20:50 - <RED> Emma killed <BLUE> Mia using Shotgun
+25/06/2025 15:21:10 - <RED> Noah killed <BLUE> Olivia using AWP
+25/06/2025 15:25:00 - Match 50000002 has ended
+
+25/06/2025 15:30:00 - New match 50000003 has started
+25/06/2025 15:30:15 - <RED> Ava killed <BLUE> Ben using M16 assisted by <RED> Chloe
+25/06/2025 15:30:35 - <RED> Ava killed <BLUE> Ethan using AK47 assisted by <RED> David
+25/06/2025 15:31:35 - <RED> Ava killed <BLUE> Henry using M16
+25/06/2025 15:31:55 - <RED> Ava killed <BLUE> Ian using AK47 assisted by <RED> David
+25/06/2025 15:32:15 - <RED> Ava killed <BLUE> Jack using Desert Eagle
+25/06/2025 15:32:35 - <RED> Ava killed <BLUE> Ben using Shotgun assisted by <RED> Chloe
+25/06/2025 15:32:55 - <RED> Ava killed <BLUE> Ethan using M16
+25/06/2025 15:33:15 - <WORLD> killed <RED> Ava by DROWN
+25/06/2025 15:33:35 - <BLUE> Ben killed <RED> Chloe using AK47
+25/06/2025 15:34:35 - <RED> Ava killed <BLUE> Henry using M16
+25/06/2025 15:34:55 - <RED> Ava killed <BLUE> Ian using AK47
+25/06/2025 15:35:15 - <RED> Ava killed <BLUE> Jack using Desert Eagle
+25/06/2025 15:35:35 - <RED> Ava killed <BLUE> Ben using Shotgun
+25/06/2025 15:35:55 - <RED> Ava killed <BLUE> Ethan using M16 assisted by <RED> Chloe
+25/06/2025 15:36:15 - <WORLD> killed <RED> Chloe by DROWN
+25/06/2025 15:40:00 - Match 50000003 has ended
