@@ -3,11 +3,13 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { MatchLog } from 'src/uploader/fps-logs.dto';
 import { Match, MatchDocument } from '../mongo-connector/match-details.schema';
+import { GlobalRankingService } from 'src/global-ranking/global-ranking.service';
 
 @Injectable()
 export class MatchStatsService {
   constructor(
     @InjectModel(Match.name) private matchModel: Model<MatchDocument>,
+    private readonly globalRankingService: GlobalRankingService,
   ) {}
 
   // calculateAndSave calculates all match statitcs and save it to mongoDB
@@ -36,6 +38,8 @@ export class MatchStatsService {
         dbMatch,
         { upsert: true, new: true },
       );
+
+      await this.globalRankingService.updateFromMatch(stats.players);
 
       results.push(saved);
     }

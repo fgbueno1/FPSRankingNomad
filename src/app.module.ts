@@ -8,6 +8,8 @@ import { MongoConnectorModule } from './mongo-connector/mongo-connector.module';
 import { MatchStatsService } from './match-stats/match-stats.service';
 import { MatchStatsModule } from './match-stats/match-stats.module';
 import { MatchesModule } from './matches/matches.module';
+import { GlobalRankingController } from './global-ranking/global-ranking.controller';
+import { GlobalRankingModule } from './global-ranking/global-ranking.module';
 
 @Module({
   imports: [UploaderModule, 
@@ -24,7 +26,8 @@ import { MatchesModule } from './matches/matches.module';
             }),
             MongoConnectorModule,
             MatchStatsModule,
-            MatchesModule
+            MatchesModule,
+            GlobalRankingModule
             ],
   controllers: [AppController],
   providers: [HealthService],

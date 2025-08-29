@@ -51,7 +51,7 @@ export class TeamStats {
   players: PlayerStats[];
 }
 
-@Schema()
+@Schema({ collection: 'matches' })
 export class Match {
   @Prop({ required: true, unique: true })
   matchId: string;

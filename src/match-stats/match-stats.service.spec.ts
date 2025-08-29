@@ -2,10 +2,14 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getModelToken } from '@nestjs/mongoose';
 import { MatchStatsService } from './match-stats.service';
 import { Match } from '../mongo-connector/match-details.schema';
+import { GlobalRankingService } from '../global-ranking/global-ranking.service'; // adjust path
 
-// Mock mongoose model
 const mockMatchModel = {
   findOneAndUpdate: jest.fn(),
+};
+
+const mockGlobalRankingService = {
+  updateFromMatch: jest.fn(),
 };
 
 describe('MatchStatsService', () => {
@@ -18,6 +22,10 @@ describe('MatchStatsService', () => {
         {
           provide: getModelToken(Match.name),
           useValue: mockMatchModel,
+        },
+        {
+          provide: GlobalRankingService,
+          useValue: mockGlobalRankingService,
         },
       ],
     }).compile();
@@ -33,8 +41,8 @@ describe('MatchStatsService', () => {
         start: new Date(),
         end: new Date(),
         events: [
-          { type: 'KILL', killerName: 'Ethan', killerTeam: 'RED', victimName: 'Mia', victimTeam: 'BLUE', weapon: 'M16' },
-          { type: 'WORLD_KILL', victimName: 'Mia', victimTeam: 'BLUE' },
+          { type: 'KILL', killerName: 'Ethan', killerTeam: 'RED', victimName: 'Mia', victimTeam: 'BLUE', weapon: 'M16', timestamp: new Date().toISOString() },
+          { type: 'WORLD_KILL', victimName: 'Mia', victimTeam: 'BLUE', timestamp: new Date().toISOString() },
         ],
       };
 
@@ -46,7 +54,7 @@ describe('MatchStatsService', () => {
           expect.objectContaining({ name: 'Mia', totalDeaths: 2, team: 'BLUE' }),
         ]),
       );
-      expect(stats.mvp).toEqual({mostUsedWeapon: 'M16', mvpName: 'Ethan'});
+      expect(stats.mvp).toEqual({ mostUsedWeapon: 'M16', mvpName: 'Ethan' });
       expect(stats.longestKillingStreak).toEqual({ playerName: 'Ethan', killsNumber: 1 });
     });
   });
