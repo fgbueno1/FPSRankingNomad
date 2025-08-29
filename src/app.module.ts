@@ -10,6 +10,8 @@ import { MatchStatsModule } from './match-stats/match-stats.module';
 import { MatchesModule } from './matches/matches.module';
 import { GlobalRankingController } from './global-ranking/global-ranking.controller';
 import { GlobalRankingModule } from './global-ranking/global-ranking.module';
+import { APP_GUARD } from '@nestjs/core';
+import { ApiKeyGuard } from './key-guard/key-guard.guard';
 
 @Module({
   imports: [UploaderModule, 
@@ -27,9 +29,12 @@ import { GlobalRankingModule } from './global-ranking/global-ranking.module';
             MongoConnectorModule,
             MatchStatsModule,
             MatchesModule,
-            GlobalRankingModule
+            GlobalRankingModule,
             ],
   controllers: [AppController],
-  providers: [HealthService],
+  providers: [HealthService, {
+    provide: APP_GUARD,
+    useClass: ApiKeyGuard,
+  },],
 })
 export class AppModule {}
