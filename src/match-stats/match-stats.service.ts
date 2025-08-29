@@ -46,9 +46,13 @@ export class MatchStatsService {
   // calculateMatchStats calculate the events such as k/d/a, kill streak, and match mvp
   private calculateMatchStats(match: MatchLog) {
     const playerStats: Record<string, any> = {};
+    let firstBlood: string | null = null;
+    const killTimes: Record<string, number[]> = {};
 
     for (const event of match.events) {
       if (event.type === 'KILL') {
+
+        if (!firstBlood) firstBlood = event.killerName;
 
         playerStats[event.killerName] ??= this.initPlayer(event.killerName, event.killerTeam);
         playerStats[event.killerName].kills++;
@@ -67,6 +71,9 @@ export class MatchStatsService {
         if (event.killerTeam === event.victimTeam) {
           playerStats[event.killerName].friendlyFire++;
         }
+
+        killTimes[event.killerName] ??= [];
+        killTimes[event.killerName].push(new Date(event.timestamp).getTime());
       }
 
       if (event.type === 'WORLD_KILL') {
@@ -84,6 +91,21 @@ export class MatchStatsService {
             : (p.kills + (p.assists/2)) - p.friendlyFire;
       
         p.KDA = Math.max(0, Math.round(rawKDA * 100) / 100);
+
+        p.awards = [];
+    
+        if (p.deaths === 0) p.awards.push('NoDeath');
+    
+        if (killTimes[p.name]?.length >= 5) {
+          const times = killTimes[p.name].sort((a, b) => a - b);
+          for (let i = 4; i < times.length; i++) {
+            if (times[i] - times[i - 4] <= 60_000) {
+              p.awards.push('SpeedKiller');
+              break;
+            }
+          }
+        }   
+        if (p.name === firstBlood) p.awards.push('FirstBlood');
       }
 
     const mvpPlayer = Object.values(playerStats).reduce((best: any, p: any) => {
@@ -123,7 +145,7 @@ export class MatchStatsService {
         friendlyFire: p.friendlyFire,
         KDA: p.KDA,
         mostUsedWeapon: Object.entries(p.weapons as Record<string, number>).sort((a, b) => b[1] - a[1])[0]?.[0] ?? null,
-        awards: [],
+        awards: p.awards,
       })),
       mvp,
       longestKillingStreak: longestStreak,
