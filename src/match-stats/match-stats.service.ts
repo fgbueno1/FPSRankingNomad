@@ -17,6 +17,11 @@ export class MatchStatsService {
     const results = [];
 
     for (const match of matches) {
+      const existingMatch = await this.matchModel.findOne({ matchId: match.matchId }).exec();
+        if (existingMatch) {
+          continue;
+        }
+
       const stats = this.calculateMatchStats(match);
       const redPlayers = stats.players.filter((p) => p.team === 'RED');
       const bluePlayers = stats.players.filter((p) => p.team === 'BLUE');
