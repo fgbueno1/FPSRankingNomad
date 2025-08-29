@@ -1,22 +1,39 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { HealthService } from './app.service';
 
 describe('AppController', () => {
-  let appController: AppController;
+  let service: HealthService;
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
       controllers: [AppController],
-      providers: [AppService],
+      providers: [HealthService],
     }).compile();
 
-    appController = app.get<AppController>(AppController);
+    service = new HealthService();
   });
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+    it('should return a health check object', () => {
+      const result = service.getHealthStatus();
+
+      expect(result).toHaveProperty('status', 'ok');
+      expect(result).toHaveProperty('uptime');
+      expect(result).toHaveProperty('timestamp');
     });
+
+    it('should return uptime as a number', () => {
+      const result = service.getHealthStatus();
+      expect(typeof result.uptime).toBe('number');
+    });
+  
+    it('should return timestamp as an ISO string', () => {
+      const result = service.getHealthStatus();
+      expect(() => new Date(result.timestamp)).not.toThrow();
+      expect(new Date(result.timestamp).toISOString()).toBe(result.timestamp);
+    });
+
   });
+  
 });

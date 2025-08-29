@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { HealthService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UploaderModule } from './uploader/uploader.module';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -25,6 +25,6 @@ import { MatchStatsModule } from './match-stats/match-stats.module';
             MatchStatsModule
             ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [HealthService],
 })
 export class AppModule {}
