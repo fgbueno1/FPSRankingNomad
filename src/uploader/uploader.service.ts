@@ -8,45 +8,60 @@ import {
   WorldKillLog,
 } from './fps-logs.dto';
 import { MatchStatsService } from 'src/match-stats/match-stats.service';
+import { NoFileError, InvalidFormatError, InvalidLogError } from "./uploader.errors";
 
 
 @Injectable()
 export class UploaderService {
     constructor(private readonly matchStatsService: MatchStatsService) {}
 
-  parseLogFile(file: Express.Multer.File): MatchLog[] {
-    const content = file.buffer.toString('utf-8');
-    const lines = content.split('\n').filter((line) => line.trim() !== '');
-
-    const matches: MatchLog[] = [];
-    let currentMatch: MatchLog | null = null;
-
-    for (const line of lines) {
-        const entry = this.parseLine(line);
-  
-        if (entry.type === 'MATCH_START') {
-          currentMatch = {
-            matchId: entry.matchId,
-            start: entry.timestamp,
-            events: [entry],
-          };
-          matches.push(currentMatch);
-        } else if (entry.type === 'MATCH_END') {
-          if (currentMatch && currentMatch.matchId === entry.matchId) {
-            currentMatch.end = entry.timestamp;
-            currentMatch.events.push(entry);
-            currentMatch = null;
+    parseLogFile(file?: Express.Multer.File): { status: string; code: number } {
+        if (!file) {
+          throw new NoFileError();
+        }
+    
+        if (!file.originalname.endsWith(".txt")) {
+          throw new InvalidFormatError();
+        }
+    
+        const content = file.buffer.toString("utf-8");
+        const lines = content.split("\n").filter((line) => line.trim() !== "");
+    
+        const matches: MatchLog[] = [];
+        let currentMatch: MatchLog | null = null;
+    
+        for (const line of lines) {
+          let entry: any;
+          try {
+            entry = this.parseLine(line);
+          } catch {
+            throw new InvalidLogError(line);
           }
-        } else {
-          if (currentMatch) {
-            currentMatch.events.push(entry);
+    
+          if (entry.type === "MATCH_START") {
+            currentMatch = {
+              matchId: entry.matchId,
+              start: entry.timestamp,
+              events: [entry],
+            };
+            matches.push(currentMatch);
+          } else if (entry.type === "MATCH_END") {
+            if (currentMatch && currentMatch.matchId === entry.matchId) {
+              currentMatch.end = entry.timestamp;
+              currentMatch.events.push(entry);
+              currentMatch = null;
+            }
+          } else {
+            if (currentMatch) {
+              currentMatch.events.push(entry);
+            }
           }
         }
+    
+        this.matchStatsService.calculateAndSave(matches);
+        return { status: "ok", code: 200 };
       }
-
-      this.matchStatsService.calculateAndSave(matches);
-      return matches;
-  }
+      
 
   // parseLine parses line by line, and add it to the respective class strcture
   private parseLine(line: string): FpsLogsDto {
@@ -109,7 +124,7 @@ export class UploaderService {
       } as WorldKillLog;
     }
 
-    throw new Error(`Unrecognized log format: ${line}`);
+    throw new Error(`Unrecognized log format`);
   }
 
   private parseDateTime(datetime: string): Date {

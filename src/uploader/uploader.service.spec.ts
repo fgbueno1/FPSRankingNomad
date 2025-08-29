@@ -28,7 +28,7 @@ describe('UploaderService', () => {
     it('should correctly parse multiple matches from a single log file', async () => {
       const mockFile: Express.Multer.File = {
         fieldname: 'file',
-        originalname: 'test.log',
+        originalname: 'test.txt',
         encoding: '7bit',
         mimetype: 'text/plain',
         buffer: Buffer.from(`
@@ -51,9 +51,12 @@ describe('UploaderService', () => {
         stream: {} as any,
       };
 
-      const result: MatchLog[] = service.parseLogFile(mockFile);
+      const result = service.parseLogFile(mockFile);
 
-      expect(result).toHaveLength(2);
+      expect(result).toEqual({
+        status: 'ok',
+        code: 200,
+      });
       expect(matchStatsService.calculateAndSave).toHaveBeenCalledTimes(1);
     });
   });
