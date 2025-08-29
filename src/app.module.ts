@@ -7,6 +7,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { MongoConnectorModule } from './mongo-connector/mongo-connector.module';
 import { MatchStatsService } from './match-stats/match-stats.service';
 import { MatchStatsModule } from './match-stats/match-stats.module';
+import { MatchesModule } from './matches/matches.module';
 
 @Module({
   imports: [UploaderModule, 
@@ -22,7 +23,8 @@ import { MatchStatsModule } from './match-stats/match-stats.module';
               }),
             }),
             MongoConnectorModule,
-            MatchStatsModule
+            MatchStatsModule,
+            MatchesModule
             ],
   controllers: [AppController],
   providers: [HealthService],

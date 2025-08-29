@@ -26,6 +26,9 @@ export class PlayerStats {
   @Prop({ default: 0 })
   friendlyFire: number;
 
+  @Prop({ default: 0 })
+  KDA: number;
+
   @Prop()
   mostUsedWeapon: string;
 

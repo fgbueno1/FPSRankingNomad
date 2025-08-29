@@ -76,8 +76,18 @@ export class MatchStatsService {
       }
     }
 
+    for (const p of Object.values(playerStats)) {
+        const effectiveDeaths = p.deaths - p.worldDeaths;
+        const rawKDA =
+          effectiveDeaths > 0
+            ? (p.kills + p.assists) / effectiveDeaths - p.friendlyFire
+            : (p.kills + p.assists) - p.friendlyFire;
+      
+        p.KDA = Math.max(0, Math.round(rawKDA * 100) / 100);
+      }
+
     const mvpPlayer = Object.values(playerStats).reduce((best: any, p: any) => {
-      return !best || p.kills > best.kills ? p : best;
+      return !best || p.KDA > best.KDA ? p : best;
     }, null);
     const mvp = {
         mvpName: mvpPlayer?.name || null,
@@ -111,6 +121,7 @@ export class MatchStatsService {
         assists: p.assists,
         worldDeaths: p.worldDeaths,
         friendlyFire: p.friendlyFire,
+        KDA: p.KDA,
         mostUsedWeapon: Object.entries(p.weapons as Record<string, number>).sort((a, b) => b[1] - a[1])[0]?.[0] ?? null,
         awards: [],
       })),
