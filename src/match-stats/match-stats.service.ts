@@ -80,8 +80,8 @@ export class MatchStatsService {
         const effectiveDeaths = p.deaths - p.worldDeaths;
         const rawKDA =
           effectiveDeaths > 0
-            ? (p.kills + p.assists) / effectiveDeaths - p.friendlyFire
-            : (p.kills + p.assists) - p.friendlyFire;
+            ? (p.kills + (p.assists/2)) / effectiveDeaths - p.friendlyFire
+            : (p.kills + (p.assists/2)) - p.friendlyFire;
       
         p.KDA = Math.max(0, Math.round(rawKDA * 100) / 100);
       }
