@@ -73,8 +73,8 @@ describe('GlobalRankingService', () => {
   describe('getTopPlayers', () => {
     it('should return top players sorted by KDA with 2 decimals', async () => {
       const playersFromDb = [
-        { playerName: 'Alice', kills: 5, assists: 2, deaths: 2, _id: '1', __v: 0 },
-        { playerName: 'Bob', kills: 3, assists: 1, deaths: 1, _id: '2', __v: 0 },
+        { playerName: 'Alice', kills: 5, assists: 2, deaths: 2, _id: '1', __v: 0, matchesPlayed: 2 },
+        { playerName: 'Bob', kills: 3, assists: 1, deaths: 1, _id: '2', __v: 0, matchesPlayed: 1 },
       ];
 
       model.exec.mockResolvedValue(playersFromDb);
@@ -82,8 +82,8 @@ describe('GlobalRankingService', () => {
       const result = await service.getTopPlayers();
 
       expect(result).toEqual([
-        { playerName: 'Bob', kills: 3, assists: 1, deaths: 1, kda: 3.5 },
-        { playerName: 'Alice', kills: 5, assists: 2, deaths: 2, kda: 3 },
+        { playerName: 'Alice', kills: 5, assists: 2, deaths: 2, kda: 2.29, matchesPlayed: 2 },
+        { playerName: 'Bob', kills: 3, assists: 1, deaths: 1, kda: 2.25, matchesPlayed: 1 },
       ]);
     });
 
@@ -98,7 +98,7 @@ describe('GlobalRankingService', () => {
       const result = await service.getTopPlayers(1);
 
       expect(result).toHaveLength(1);
-      expect(result[0].playerName).toBe('Bob');
+      expect(result[0].playerName).toBe('Alice');
     });
   });
 });
