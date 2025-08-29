@@ -66,7 +66,7 @@ export class Match {
     type: Object,
     default: { mvpName: null, mostUsedWeapon: null },
   })
-  mvp: { mvpName: any; mostUsedWeapon: string | null };
+  mvp: { mvpName: string | null; mostUsedWeapon: string | null };
 
   @Prop({ type: Object })
   score: Record<string, number>;
