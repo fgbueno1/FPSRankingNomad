@@ -28,6 +28,7 @@ export class MatchStatsService {
         RED_TEAM: { players: redPlayers },
         BLUE_TEAM: { players: bluePlayers },
         longestKillingStreak: stats.longestKillingStreak,
+        mvp: stats.mvp
       };
 
       const saved = await this.matchModel.findOneAndUpdate(
@@ -75,9 +76,16 @@ export class MatchStatsService {
       }
     }
 
-    const mvp = Object.values(playerStats).reduce((best: any, p: any) => {
+    const mvpPlayer = Object.values(playerStats).reduce((best: any, p: any) => {
       return !best || p.kills > best.kills ? p : best;
     }, null);
+    const mvp = {
+        mvpName: mvpPlayer?.name || null,
+        mostUsedWeapon: mvpPlayer
+          ? Object.entries(mvpPlayer.weapons as Record<string, number>)
+              .sort((a, b) => b[1] - a[1])[0]?.[0] ?? null
+          : null,
+      };
 
     let streaks: Record<string, number> = {};
     let longestStreak = { playerName: '', killsNumber: 0 };
@@ -106,7 +114,7 @@ export class MatchStatsService {
         mostUsedWeapon: Object.entries(p.weapons as Record<string, number>).sort((a, b) => b[1] - a[1])[0]?.[0] ?? null,
         awards: [],
       })),
-      mvp: mvp?.name || null,
+      mvp,
       longestKillingStreak: longestStreak,
     };
   }

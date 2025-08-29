@@ -46,7 +46,7 @@ describe('MatchStatsService', () => {
           expect.objectContaining({ name: 'Mia', totalDeaths: 2, team: 'BLUE' }),
         ]),
       );
-      expect(stats.mvp).toBe('Ethan');
+      expect(stats.mvp).toEqual({mostUsedWeapon: 'M16', mvpName: 'Ethan'});
       expect(stats.longestKillingStreak).toEqual({ playerName: 'Ethan', killsNumber: 1 });
     });
   });

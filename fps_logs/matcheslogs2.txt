@@ -44,24 +44,24 @@
 
 
 26/06/2025 16:30:00 - New match 50000006 has started
-26/06/2025 16:30:10 - <RED> Liam killed <BLUE> Ava using M16 assisted by <RED> Noah
+26/06/2025 16:30:10 - <RED> Liam killed <BLUE> Ava using Desert Eagle assisted by <RED> Noah
 26/06/2025 16:30:25 - <RED> Liam killed <BLUE> Mia using AK47
 26/06/2025 16:30:40 - <RED> Liam killed <BLUE> Emma using Desert Eagle
-26/06/2025 16:30:55 - <RED> Liam killed <BLUE> Oliver using Shotgun
+26/06/2025 16:30:55 - <RED> Liam killed <BLUE> Oliver using Desert Eagle
 26/06/2025 16:31:10 - <RED> Liam killed <BLUE> Mia using M16 assisted by <RED> Noah
 26/06/2025 16:31:25 - <WORLD> killed <RED> Noah by DROWN
 26/06/2025 16:31:40 - <RED> Vash killed <BLUE> Ava using AWP
 26/06/2025 16:31:55 - <BLUE> Emma killed <RED> Liam using Shotgun
 26/06/2025 16:32:10 - <RED> Liam killed <BLUE> Oliver using Desert Eagle
 26/06/2025 16:32:25 - <RED> Liam killed <BLUE> Mia using AK47 assisted by <RED> Vash
-26/06/2025 16:32:40 - <RED> Liam killed <BLUE> Emma using Shotgun
+26/06/2025 16:32:40 - <RED> Liam killed <BLUE> Emma using Desert Eagle
 26/06/2025 16:32:55 - <RED> Liam killed <BLUE> Olivia using M16 assisted by <RED> Noah
 26/06/2025 16:33:10 - <WORLD> killed <RED> Liam by DROWN
 26/06/2025 16:33:25 - <BLUE> Ava killed <BLUE> Oliver using AK47
 26/06/2025 16:33:40 - <RED> Liam killed <BLUE> Mia using M16
 26/06/2025 16:33:55 - <RED> Liam killed <BLUE> Emma using Shotgun assisted by <RED> Vash
 26/06/2025 16:34:10 - <RED> Liam killed <BLUE> Olivia using Desert Eagle
-26/06/2025 16:34:25 - <RED> Liam killed <BLUE> Ava using M16
+26/06/2025 16:34:25 - <RED> Liam killed <BLUE> Ava using Desert Eagle
 26/06/2025 16:34:40 - <RED> Vash killed <RED> Liam using AK47
 26/06/2025 16:40:00 - Match 50000006 has ended
 
