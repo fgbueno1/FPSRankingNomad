@@ -42,6 +42,7 @@ export class MatchesService {
       friendlyFire: p.friendlyFire,
       KDA: p.KDA,
       mostUsedWeapon: p.mostUsedWeapon,
+      awards: p.awards
     }))
     .sort((a, b) => b.KDA - a.KDA);
 
