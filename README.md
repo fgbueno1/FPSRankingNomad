@@ -1,98 +1,201 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# FPS Ranking Nomad
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## 📋 Descrição
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+FPS Ranking Nomad é uma aplicação backend desenvolvida em NestJS para gerenciar rankings e estatísticas de jogadores de FPS (First Person Shooter). O sistema permite o upload de logs de partidas, processamento de estatísticas e geração de rankings globais.
 
-## Description
+## 🚀 Funcionalidades
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **Upload de Logs**: Sistema para upload e processamento de logs de partidas
+- **Estatísticas de Partidas**: Análise e armazenamento de estatísticas detalhadas e ranking da partida
+- **Ranking Global**: Sistema de ranking baseado no desempenho dos jogadores, o ranking favorece jogadores consistentes em multiplas partidas, enquanto ainda recompensa altas perfomaces em uma única partida
+- **Autenticação por Chave**: Sistema de autenticação via API keys
+- **Integração MongoDB**: Armazenamento persistente de dados
 
-## Project setup
+## 🛠️ Tecnologias Utilizadas
 
-```bash
-$ npm install
-```
+- **Backend**: NestJS (Node.js + TypeScript)
+- **Banco de Dados**: MongoDB com Mongoose
+- **Upload de Arquivos**: Multer
+- **Configuração**: @nestjs/config
+- **Containerização**: Docker
 
-## Compile and run the project
+## 📦 Pré-requisitos
+
+- Node.js (versão 18 ou superior)
+- npm ou yarn
+- MongoDB
+- Docker (opcional, para containerização)
+
+## 🔧 Instalação
+
+### 1. Clone o repositório
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+git clone <url-do-repositorio>
+cd fpsranking-nomad
 ```
 
-## Run tests
+### 2. Crie arquivos de varáveis de ambiente
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+touch dev.env
+touch .env
 ```
 
-## Deployment
+### 3. Configure as variáveis de ambiente com valores similares a:
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+dev.env
+```bash
+MONGODB_URI=mongodb://admin:admin@mongo/FpsNomadDB?authSource=admin
+API_KEY=mysecretkey123
+```
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+Edite o arquivo `.env` com suas configurações:
+
+```env
+MONGODB_URI=mongodb://localhost:27017/fps-ranking
+PORT=3000
+API_KEY=your-secret-api-key
+```
+
+### 4. Execute o projeto
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+# Desenvolvimento
+npm run start:dev
+
+# Produção
+npm run build
+npm run start:prod
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+## 🐳 Execução com Docker
 
-## Resources
+### Usando Docker Compose (Recomendado)
 
-Check out a few resources that may come in handy when working with NestJS:
+```bash
+docker-compose up -d
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### Usando Docker diretamente
 
-## Support
+```bash
+# Build da imagem
+docker build -t fpsranking-nomad .
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+# Execução
+docker run -p 3000:3000 fpsranking-nomad
+```
 
-## Stay in touch
+## 🧪 Testes
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+# Testes unitários
+npm run test
 
-## License
+# Testes em modo watch
+npm run test:watch
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+# Testes e2e
+npm run test:e2e
+
+# Cobertura de testes
+npm run test:cov
+```
+
+## 📁 Estrutura do Projeto
+
+```
+src/
+├── app.module.ts              # Módulo principal da aplicação
+├── main.ts                    # Ponto de entrada da aplicação
+├── app.controller.ts          # Controller principal
+├── app.service.ts             # Serviço principal
+├── key-guard/                 # Sistema de autenticação por chave
+├── uploader/                  # Sistema de upload de arquivos
+├── global-ranking/            # Sistema de ranking global
+├── mongo-connector/           # Conectores do MongoDB
+├── matches/                   # Gerenciamento de partidas
+└── match-stats/              # Estatísticas de partidas
+```
+
+## 🔐 Autenticação
+
+O sistema utiliza autenticação via API Key. Para acessar os endpoints protegidos, inclua o header:
+
+```
+Authorization: Bearer YOUR_API_KEY
+```
+
+## 📊 Endpoints da API
+
+### Upload de Logs
+- `POST /upload` - Upload de arquivos de log de partidas
+
+### Estatísticas
+- `GET /match-stats` - Obter estatísticas de partidas
+- `POST /match-stats` - Criar novas estatísticas
+
+### Rankings
+- `GET /global-ranking` - Obter ranking global
+- `POST /global-ranking` - Atualizar rankings
+
+### Partidas
+- `GET /matches` - Listar partidas
+- `POST /matches` - Criar nova partida
+
+## 🔧 Configuração de Desenvolvimento
+
+### Formatação de Código
+
+```bash
+npm run format
+```
+
+### Linting
+
+```bash
+npm run lint
+```
+
+### Debug
+
+```bash
+npm run start:debug
+```
+
+## 📝 Logs
+
+Os logs da aplicação são armazenados no diretório `fps_logs/`. Certifique-se de que este diretório tenha permissões de escrita.
+
+## 🤝 Contribuição
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## 🆘 Suporte
+
+Para suporte e dúvidas:
+
+- Abra uma [issue](https://github.com/seu-usuario/fpsranking-nomad/issues)
+- Entre em contato através do email: seu-email@exemplo.com
+
+## 🔄 Changelog
+
+### v0.0.1
+- Implementação inicial do sistema de ranking
+- Sistema de upload de logs
+- Integração com MongoDB
+- Sistema de autenticação por API key
+
+---
+
+**Desenvolvido com ❤️ usando NestJS**
