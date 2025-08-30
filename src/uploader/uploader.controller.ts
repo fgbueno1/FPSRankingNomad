@@ -21,10 +21,9 @@ import {
         const status = this.uploaderService.parseLogFile(file);
   
         return {
-          status: "ok",
-          code: 200,
+          status: "created",
+          code: 201,
           message: "File parsed and stats saved successfully",
-          data: status,
         };
       } catch (err) {
         if (err instanceof NoFileError) {
