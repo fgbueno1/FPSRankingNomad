@@ -82,7 +82,7 @@ x-api-key: YOUR_API_KEY
 **Resposta:**
 ```json
 {
-  "count": 5,
+  "count": 3,
   "urls": [
     "http://localhost:3000/matches/match_001",
     "http://localhost:3000/matches/match_002",
