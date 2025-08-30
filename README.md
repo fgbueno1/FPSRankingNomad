@@ -31,7 +31,7 @@ Os logs para testes estão armazenados no diretório `fps_logs/`. Utilize-os de 
 - MongoDB
 - Docker e docker-compose
 
-## 🔧 Instalação
+## 🔧 Deploy via Docker
 
 ### 1. Clone o repositório
 
