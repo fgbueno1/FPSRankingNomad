@@ -131,7 +131,11 @@ x-api-key: YOUR_API_KEY
       "worldDeaths": 2,
       "friendlyFire": 1,
       "KDA": 3.75,
-      "mostUsedWeapon": "AK47"
+      "mostUsedWeapon": "AK47",
+      "awards": [
+        "SpeedKiller",
+        "FirstBlood"
+      ]
     }
   ]
 }
