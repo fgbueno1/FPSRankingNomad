@@ -7,15 +7,15 @@ import {
   KillLog,
   WorldKillLog,
 } from './fps-logs.dto';
-import { MatchStatsService } from 'src/match-stats/match-stats.service';
+import { MessageQueueService } from 'src/message-queue/message-queue.service';
 import { NoFileError, InvalidFormatError, InvalidLogError } from "./uploader.errors";
 
 
 @Injectable()
 export class UploaderService {
-    constructor(private readonly matchStatsService: MatchStatsService) {}
+    constructor(private readonly messageQueueService: MessageQueueService) {}
 
-    parseLogFile(file?: Express.Multer.File): { status: string; code: number } {
+    async parseLogFile(file?: Express.Multer.File): Promise<{ status: string; code: number }> {
         if (!file) {
           throw new NoFileError();
         }
@@ -58,7 +58,8 @@ export class UploaderService {
           }
         }
     
-        this.matchStatsService.calculateAndSave(matches);
+        // Send matches to message queue for asynchronous processing
+        await this.messageQueueService.publishMatchForProcessing(matches);
         return { status: "ok", code: 200 };
       }
       

@@ -11,6 +11,7 @@ Os logs para testes estão armazenados no diretório `fps_logs/`. Utilize-os de 
 ## 🚀 Funcionalidades
 
 - **Upload de Logs**: Sistema para upload e processamento de logs de partidas
+- **Processamento Assíncrono**: Processamento de estatísticas usando RabbitMQ para melhor performance e escalabilidade
 - **Estatísticas de Partidas**: Análise e armazenamento de estatísticas detalhadas e ranking da partida
 - **Ranking Global**: Sistema de ranking baseado no desempenho dos jogadores, o ranking favorece jogadores consistentes em multiplas partidas, enquanto ainda recompensa altas perfomaces em uma única partida
 - **Autenticação por Chave**: Sistema de autenticação via API keys
@@ -20,6 +21,7 @@ Os logs para testes estão armazenados no diretório `fps_logs/`. Utilize-os de 
 
 - **Backend**: NestJS (Node.js + TypeScript)
 - **Banco de Dados**: MongoDB com Mongoose
+- **Message Queue**: RabbitMQ com amqplib
 - **Upload de Arquivos**: Multer
 - **Configuração**: @nestjs/config
 - **Containerização**: Docker
@@ -53,6 +55,7 @@ dev.env
 ```env
 MONGODB_URI=mongodb://admin:admin@mongo/FpsNomadDB?authSource=admin
 API_KEY=mysecretkey123
+RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
 ```
 
 .env
@@ -94,7 +97,7 @@ x-api-key: YOUR_API_KEY
 ## 📊 Endpoints da API
 
 ### Upload de Logs
-- `POST /upload` - Upload de arquivos de log de partidas
+- `POST /upload/log` - Upload de arquivos de log de partidas (processamento assíncrono)
 
 
 ### Ranking Global
@@ -103,3 +106,18 @@ x-api-key: YOUR_API_KEY
 ### Partidas
 - `GET /matches` - Listar partidas
 - `GET /matches/:id` - visualizar estatísticas da partida e ranking dos jogadores participantes
+
+## 🔄 Processamento Assíncrono
+
+O sistema agora utiliza **RabbitMQ** para processamento assíncrono de estatísticas de partidas:
+
+- **Upload Rápido**: O upload de logs retorna imediatamente (HTTP 202)
+- **Processamento em Background**: As estatísticas são calculadas de forma assíncrona
+- **Escalabilidade**: Suporte a múltiplos uploads simultâneos
+- **Confiabilidade**: Mensagens persistem mesmo com reinicializações
+
+### Monitoramento
+- **RabbitMQ Management UI**: `http://localhost:15672` (guest/guest)
+- **Logs da Aplicação**: Acompanhe o processamento em tempo real
+
+Para mais detalhes, consulte [ASYNC_PROCESSING.md](./ASYNC_PROCESSING.md).

@@ -1,48 +1,79 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UploaderService } from './uploader.service';
-import { MatchLog } from './fps-logs.dto';
-import { MatchStatsService } from 'src/match-stats/match-stats.service';
+import { MessageQueueService } from 'src/message-queue/message-queue.service';
+import { NoFileError, InvalidFormatError, InvalidLogError } from './uploader.errors';
 
 describe('UploaderService', () => {
   let service: UploaderService;
-  let matchStatsService: MatchStatsService;
+  let messageQueueService: MessageQueueService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         UploaderService,
         {
-          provide: MatchStatsService,
+          provide: MessageQueueService,
           useValue: {
-            calculateAndSave: jest.fn().mockResolvedValue([]),
+            publishMatchForProcessing: jest.fn().mockResolvedValue(undefined),
           },
         },
       ],
     }).compile();
 
     service = module.get<UploaderService>(UploaderService);
-    matchStatsService = module.get<MatchStatsService>(MatchStatsService);
+    messageQueueService = module.get<MessageQueueService>(MessageQueueService);
   });
 
   describe('parseLogFile', () => {
-    it('should correctly parse multiple matches from a single log file', async () => {
+    it('should throw NoFileError if no file is provided', async () => {
+      await expect(service.parseLogFile(undefined)).rejects.toThrow(NoFileError);
+    });
+
+    it('should throw InvalidFormatError if file extension is not .txt', async () => {
+      const mockFile: Express.Multer.File = {
+        fieldname: 'file',
+        originalname: 'invalid.log',
+        encoding: '7bit',
+        mimetype: 'text/plain',
+        buffer: Buffer.from(''),
+        size: 0,
+        destination: '',
+        filename: '',
+        path: '',
+        stream: {} as any,
+      };
+
+      await expect(service.parseLogFile(mockFile)).rejects.toThrow(InvalidFormatError);
+    });
+
+    it('should throw InvalidLogError if a line cannot be parsed', async () => {
+      const mockFile: Express.Multer.File = {
+        fieldname: 'file',
+        originalname: 'test.txt',
+        encoding: '7bit',
+        mimetype: 'text/plain',
+        buffer: Buffer.from('25/06/2025 15:34:22 - This is not valid'),
+        size: 0,
+        destination: '',
+        filename: '',
+        path: '',
+        stream: {} as any,
+      };
+
+      await expect(service.parseLogFile(mockFile)).rejects.toThrow(InvalidLogError);
+    });
+
+    it('should parse valid logs and publish matches to the queue', async () => {
       const mockFile: Express.Multer.File = {
         fieldname: 'file',
         originalname: 'test.txt',
         encoding: '7bit',
         mimetype: 'text/plain',
         buffer: Buffer.from(`
-          25/06/2025 15:34:22 - New match 11348965 has started 
-          25/06/2025 15:36:04 - <RED> Roman killed <BLUE> Nick using M16 assisted by <RED> Logan
-          25/06/2025 15:37:14 - <WORLD> killed <BLUE> Nick by DROWN 
-          25/06/2025 15:37:44 - <RED> Roman killed <RED> Sants using M16
-          25/06/2025 15:38:07 - Match 11348965 has ended
-
-          25/06/2025 15:34:22 - New match 11348967 has started
-          25/06/2025 15:36:04 - <RED> Roman killed <BLUE> Nick using M16 assisted by <RED> Logan
-          25/06/2025 15:37:14 - <WORLD> killed <BLUE> Nick by DROWN 
-          25/06/2025 15:37:44 - <RED> Roman killed <RED> Sants using M16
-          25/06/2025 15:38:07 - Match 11348967 has ended
+          25/06/2025 15:34:22 - New match 12345 has started
+          25/06/2025 15:35:00 - <RED> Roman killed <BLUE> Nick using M16 assisted by <RED> Logan
+          25/06/2025 15:36:00 - <WORLD> killed <BLUE> Nick by DROWN
+          25/06/2025 15:37:00 - Match 12345 has ended
         `),
         size: 0,
         destination: '',
@@ -51,13 +82,18 @@ describe('UploaderService', () => {
         stream: {} as any,
       };
 
-      const result = service.parseLogFile(mockFile);
+      const result = await service.parseLogFile(mockFile);
 
-      expect(result).toEqual({
-        status: 'ok',
-        code: 200,
-      });
-      expect(matchStatsService.calculateAndSave).toHaveBeenCalledTimes(1);
+      expect(result).toEqual({ status: 'ok', code: 200 });
+      expect(messageQueueService.publishMatchForProcessing).toHaveBeenCalledTimes(1);
+      expect(messageQueueService.publishMatchForProcessing).toHaveBeenCalledWith(
+        expect.arrayContaining([
+          expect.objectContaining({
+            matchId: '12345',
+            events: expect.any(Array),
+          }),
+        ]),
+      );
     });
   });
 });

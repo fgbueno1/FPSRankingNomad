@@ -10,6 +10,7 @@ import { MatchStatsModule } from './match-stats/match-stats.module';
 import { MatchesModule } from './matches/matches.module';
 import { GlobalRankingController } from './global-ranking/global-ranking.controller';
 import { GlobalRankingModule } from './global-ranking/global-ranking.module';
+import { MessageQueueModule } from './message-queue/message-queue.module';
 import { APP_GUARD } from '@nestjs/core';
 import { ApiKeyGuard } from './key-guard/key-guard.guard';
 
@@ -30,6 +31,7 @@ import { ApiKeyGuard } from './key-guard/key-guard.guard';
             MatchStatsModule,
             MatchesModule,
             GlobalRankingModule,
+            MessageQueueModule,
             ],
   controllers: [AppController],
   providers: [HealthService, {

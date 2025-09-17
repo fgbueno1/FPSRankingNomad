@@ -18,12 +18,12 @@ import {
     @UseInterceptors(FileInterceptor("file"))
     async uploadLog(@UploadedFile() file: Express.Multer.File) {
       try {
-        const status = this.uploaderService.parseLogFile(file);
+        const status = await this.uploaderService.parseLogFile(file);
   
         return {
-          status: "created",
-          code: 201,
-          message: "File parsed and stats saved successfully",
+          status: "accepted",
+          code: 202,
+          message: "File parsed and queued for processing",
         };
       } catch (err) {
         if (err instanceof NoFileError) {
