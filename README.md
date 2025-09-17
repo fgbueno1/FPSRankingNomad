@@ -3,6 +3,7 @@
 ## 📋 Descrição
 
 FPS Ranking Nomad é uma aplicação backend desenvolvida em NestJS para gerenciar rankings e estatísticas de jogadores de FPS (First Person Shooter). O sistema permite o upload de logs de partidas, processamento de estatísticas e geração de rankings globais.
+O Ranking é gerado de acordo com a média de K/D/A dos jogadores, e o ranking global carrega uma particularidade, onde utiliza um algoritmo para recompensar jogadores que tenham mais partidas jogadas.
 
 ### 📝 Logs
 
@@ -33,7 +34,7 @@ Os logs para testes estão armazenados no diretório `fps_logs/`. Utilize-os de 
 - MongoDB
 - Docker e docker-compose
 
-## 🔧 Instalação
+## 🔧 Deploy via Docker
 
 ### 1. Clone o repositório
 
