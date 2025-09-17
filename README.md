@@ -120,5 +120,3 @@ O sistema agora utiliza **RabbitMQ** para processamento assíncrono de estatíst
 ### Monitoramento
 - **RabbitMQ Management UI**: `http://localhost:15672` (guest/guest)
 - **Logs da Aplicação**: Acompanhe o processamento em tempo real
-
-Para mais detalhes, consulte [ASYNC_PROCESSING.md](./ASYNC_PROCESSING.md).
