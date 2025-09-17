@@ -58,7 +58,6 @@ export class UploaderService {
           }
         }
     
-        // Send matches to message queue for asynchronous processing
         await this.messageQueueService.publishMatchForProcessing(matches);
         return { status: "ok", code: 200 };
       }
