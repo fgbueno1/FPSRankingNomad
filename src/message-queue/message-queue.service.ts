@@ -1,11 +1,14 @@
 import { Injectable, Inject, OnModuleDestroy } from '@nestjs/common';
-import { MatchLog } from 'src/uploader/fps-logs.dto';
+import { MatchLog } from 'src/parser/fps-logs.dto';
 import * as amqp from 'amqplib';
 
 @Injectable()
 export class MessageQueueService implements OnModuleDestroy {
   private channel: amqp.Channel;
-  private readonly queueName = 'match-processing';
+  private readonly queues = {
+    logParsing: 'log-parsing',
+    matchProcessing: 'match-processing',
+  };
 
   constructor(
     @Inject('RABBITMQ_CONNECTION') private connection: amqp.Connection,
@@ -15,11 +18,30 @@ export class MessageQueueService implements OnModuleDestroy {
 
   private async initializeChannel() {
     this.channel = await (this.connection as any).createChannel();
-    await this.channel.assertQueue(this.queueName, {
-      durable: true, // Queue survives broker restarts
-    });
+    await this.channel.assertQueue(this.queues.logParsing, { durable: true });
+    await this.channel.assertQueue(this.queues.matchProcessing, { durable: true });
   }
 
+  async publishLogForParsing(payload: { jobId: string; filePath: string; originalName: string }): Promise<void> {
+    if (!this.channel) {
+      await this.initializeChannel();
+    }
+
+    const message = JSON.stringify(payload);
+    const sent = this.channel.sendToQueue(
+      this.queues.logParsing,
+      Buffer.from(message),
+      { persistent: true },
+    );
+
+    if (!sent) {
+      throw new Error('Failed to send message to log-parsing queue');
+    }
+
+    console.log(`Published log file job ${payload.jobId} to log-parsing queue`);
+  }
+
+  // publishMatchForProcessing publishes the matches to the queue
   async publishMatchForProcessing(matches: MatchLog[]): Promise<void> {
     if (!this.channel) {
       await this.initializeChannel();
@@ -28,7 +50,7 @@ export class MessageQueueService implements OnModuleDestroy {
     const message = JSON.stringify(matches);
     
     const sent = this.channel.sendToQueue(
-      this.queueName,
+      this.queues.matchProcessing,
       Buffer.from(message),
       {
         persistent: true, // Message survives broker restarts

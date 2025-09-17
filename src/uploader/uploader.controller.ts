@@ -8,7 +8,7 @@ import {
   } from "@nestjs/common";
   import { FileInterceptor } from "@nestjs/platform-express";
   import { UploaderService } from "./uploader.service";
-  import { NoFileError, InvalidFormatError, InvalidLogError } from "./uploader.errors";
+  import { NoFileError, InvalidFormatError } from "./uploader.errors";
   
   @Controller("upload")
   export class UploaderController {
@@ -18,21 +18,18 @@ import {
     @UseInterceptors(FileInterceptor("file"))
     async uploadLog(@UploadedFile() file: Express.Multer.File) {
       try {
-        const status = await this.uploaderService.parseLogFile(file);
+        const status = await this.uploaderService.uploadLogFile(file);
   
         return {
           status: "accepted",
           code: 202,
-          message: "File parsed and queued for processing",
+          message: "File queued for processing",
         };
       } catch (err) {
         if (err instanceof NoFileError) {
           throw new BadRequestException(err.message);
         }
         if (err instanceof InvalidFormatError) {
-          throw new BadRequestException(err.message);
-        }
-        if (err instanceof InvalidLogError) {
           throw new BadRequestException(err.message);
         }
         throw err;

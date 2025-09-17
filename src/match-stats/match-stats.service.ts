@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { MatchLog } from 'src/uploader/fps-logs.dto';
+import { MatchLog } from 'src/parser/fps-logs.dto';
 import { Match, MatchDocument } from '../mongo-connector/match-details.schema';
 import { GlobalRankingService } from 'src/global-ranking/global-ranking.service';
 

@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UploaderService } from './uploader.service';
 import { MessageQueueService } from 'src/message-queue/message-queue.service';
-import { NoFileError, InvalidFormatError, InvalidLogError } from './uploader.errors';
+import { NoFileError, InvalidFormatError } from './uploader.errors';
 
 describe('UploaderService', () => {
   let service: UploaderService;
@@ -14,7 +14,7 @@ describe('UploaderService', () => {
         {
           provide: MessageQueueService,
           useValue: {
-            publishMatchForProcessing: jest.fn().mockResolvedValue(undefined),
+            publishLogForParsing: jest.fn().mockResolvedValue(undefined),
           },
         },
       ],
@@ -26,7 +26,7 @@ describe('UploaderService', () => {
 
   describe('parseLogFile', () => {
     it('should throw NoFileError if no file is provided', async () => {
-      await expect(service.parseLogFile(undefined)).rejects.toThrow(NoFileError);
+      await expect(service.uploadLogFile(undefined)).rejects.toThrow(NoFileError);
     });
 
     it('should throw InvalidFormatError if file extension is not .txt', async () => {
@@ -43,24 +43,7 @@ describe('UploaderService', () => {
         stream: {} as any,
       };
 
-      await expect(service.parseLogFile(mockFile)).rejects.toThrow(InvalidFormatError);
-    });
-
-    it('should throw InvalidLogError if a line cannot be parsed', async () => {
-      const mockFile: Express.Multer.File = {
-        fieldname: 'file',
-        originalname: 'test.txt',
-        encoding: '7bit',
-        mimetype: 'text/plain',
-        buffer: Buffer.from('25/06/2025 15:34:22 - This is not valid'),
-        size: 0,
-        destination: '',
-        filename: '',
-        path: '',
-        stream: {} as any,
-      };
-
-      await expect(service.parseLogFile(mockFile)).rejects.toThrow(InvalidLogError);
+      await expect(service.uploadLogFile(mockFile)).rejects.toThrow(InvalidFormatError);
     });
 
     it('should parse valid logs and publish matches to the queue', async () => {
@@ -82,18 +65,10 @@ describe('UploaderService', () => {
         stream: {} as any,
       };
 
-      const result = await service.parseLogFile(mockFile);
+      const result = await service.uploadLogFile(mockFile);
 
-      expect(result).toEqual({ status: 'ok', code: 200 });
-      expect(messageQueueService.publishMatchForProcessing).toHaveBeenCalledTimes(1);
-      expect(messageQueueService.publishMatchForProcessing).toHaveBeenCalledWith(
-        expect.arrayContaining([
-          expect.objectContaining({
-            matchId: '12345',
-            events: expect.any(Array),
-          }),
-        ]),
-      );
+      expect(result).toEqual({ status: 'queued', code: 202 });
+      expect(messageQueueService.publishLogForParsing).toHaveBeenCalledTimes(1);
     });
   });
 });

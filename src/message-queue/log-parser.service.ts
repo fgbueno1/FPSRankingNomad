@@ -1,16 +1,17 @@
 import { Injectable, Inject, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
-import { MatchLog } from 'src/parser/fps-logs.dto';
-import { MatchStatsService } from 'src/match-stats/match-stats.service';
+import { ParserService } from 'src/parser/parser.service';
 import * as amqp from 'amqplib';
+import { MessageQueueService } from './message-queue.service';
 
 @Injectable()
-export class MatchProcessorService implements OnModuleInit, OnModuleDestroy {
+export class LogParserService implements OnModuleInit, OnModuleDestroy {
   private channel: amqp.Channel;
-  private readonly queueName = 'match-processing';
+  private readonly queueName = 'log-parsing';
 
   constructor(
     @Inject('RABBITMQ_CONNECTION') private connection: any,
-    private readonly matchStatsService: MatchStatsService,
+    private readonly parserService: ParserService,
+    private readonly messageQueueService: MessageQueueService,
   ) {}
 
   async onModuleInit() {
@@ -29,22 +30,24 @@ export class MatchProcessorService implements OnModuleInit, OnModuleDestroy {
   }
 
   private async startConsuming() {
-    console.log('Starting to consume match processing messages...');
+    console.log('Starting to consume log parsing messages...');
     
     await this.channel.consume(
       this.queueName,
       async (msg) => {
         if (msg) {
           try {
-            const matches: MatchLog[] = JSON.parse(msg.content.toString());
-            console.log(`Processing ${matches.length} matches...`);
+            const payload: { jobId: string; filePath: string; originalName: string } = JSON.parse(msg.content.toString());
+            console.log(`Processing ${payload.originalName}...`);
             
-            await this.matchStatsService.calculateAndSave(matches);
+            const matches = await this.parserService.parseLogFile(payload.filePath);
+            
+            await this.messageQueueService.publishMatchForProcessing(matches);
             
             this.channel.ack(msg);
-            console.log(`Successfully processed ${matches.length} matches`);
+            console.log(`Successfully processed ${payload.originalName}`);
           } catch (error) {
-            console.error('Error processing matches:', error);
+            console.error('Error processing log file:', error);
             
             this.channel.nack(msg, false, false);
           }
