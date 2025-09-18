@@ -32,6 +32,7 @@ Os logs para testes estão armazenados no diretório `fps_logs/`. Utilize-os de 
 - Node.js (versão 18 ou superior)
 - npm ou yarn
 - MongoDB
+- RabbitMQ
 - Docker e docker-compose
 
 ## 🔧 Deploy via Docker
@@ -63,6 +64,8 @@ RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
 ```env
 MONGO_USER=admin
 MONGO_PASSWORD=admin
+RABBITMQ_USER=guest
+RABBITMQ_PASSWORD=guest
 ```
 
 ### 4. Execute o projeto

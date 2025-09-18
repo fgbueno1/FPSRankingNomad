@@ -43,19 +43,34 @@ O FPS Ranking Nomad é uma aplicação backend desenvolvida em NestJS que gerenc
   - `GlobalRankingController`: Endpoint para rankings
   - `GlobalRankingService`: Cálculo de rankings
 
-### 6. Mongo Connector Module
+### 6. Parser Module
+- **Arquivo**: `src/parser/`
+- **Responsabilidade**: Parsing dos arquivos de log
+- **Componentes**:
+  - `ParserService`: Lógica de parsing dos arquivos de logs
+  - `ParserErrors`: Classes de erro customizadas
+  - `FpsLogsDTO`: DTOs utilizados pelo parser
+
+### 7. Message Queue Module
+- **Arquivo**: `src/message-queue/`
+- **Responsabilidade**: Processamento assíncrono dos arquivos de log
+- **Componentes**:
+  - `MessageQueueService`: Envia novos eventos para filas de processamento
+  - `LogParserService`: Cria um novo worker utilizando o modulo Parser para processar o arquivo de logs
+  - `MarchProcessorService`: Cria um novo worker utilizando o modulo Match Stats para processar estatísticas das partidas
+
+### 8. Mongo Connector Module
 - **Arquivo**: `src/mongo-connector/`
 - **Responsabilidade**: Conectividade com MongoDB
 - **Componentes**:
   - `MongoConnectorService`: Operações CRUD
   - Schemas: Definição dos modelos de dados
 
-### 7. Key Guard Module
+### 9. Key Guard Module
 - **Arquivo**: `src/key-guard/`
 - **Responsabilidade**: Autenticação via API Key
 - **Componentes**:
   - `ApiKeyGuard`: Guard de autenticação
-
 
 ## Tipos de Teste
 - **Unitários**: Testes de serviços e lógica de negócio
