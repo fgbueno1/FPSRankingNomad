@@ -84,6 +84,8 @@ src/
 ├── app.service.ts             # Serviço principal
 ├── key-guard/                 # Sistema de autenticação por api key
 ├── uploader/                  # Sistema de upload de arquivos
+├── parser/                    # Sistema de parsing de logs
+├── message-queue/             # Processamento Assíncrono dos logs
 ├── global-ranking/            # Sistema de ranking global
 ├── mongo-connector/           # Conectores do MongoDB
 ├── matches/                   # Listagem de partidas e estatísticas
